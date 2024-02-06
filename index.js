@@ -1,5 +1,6 @@
 require('./utils.js');
 require('dotenv').config();
+const fs = require('fs');
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -45,6 +46,50 @@ app.get('/', (req, res) => {
     } else {
         console.log("\'\/\', \'\/home\': Current session cookie:", req.cookies)
         res.render('./index.ejs');
+    }
+});
+
+const headerContent = fs.readFileSync('./views/partials/header2.ejs', 'utf8');
+const footerContent = fs.readFileSync('views/partials/footer.ejs', 'utf8');
+app.get('/findUser', (req, res) => {
+    res.render("findUser");
+});
+app.post('/processForm', async (req, res) => {
+    var name = req.body.name;
+    try {
+        const query = `SELECT * FROM user WHERE username = '${name}'`;
+        console.log("query: ", query);
+        const [rows, fields] = await database.query(query);
+        console.log("rows: ", rows);
+        if (rows.length > 0) {
+            // If user found, send user details
+            res.send(`
+            ${headerContent}
+                <form action='/processForm' method='post'>
+                    Search for a user: <input name='name' type='text' placeholder='Name'>
+                    <button>Submit</button>
+                </form>
+                <p>User found: ${rows[0].username}</p>
+                Details:
+                <ul>
+                    <li>...</li>
+                    <li>...</li>
+                ${footerContent}
+            `);
+        } else {
+            res.send(`
+            ${headerContent}
+                <form action='/processForm' method='post'>
+                    Search for a user: <input name='name' type='text' placeholder='Name'>
+                    <button>Submit</button>
+                </form>
+                <p>User ${name} not found</p>
+                ${footerContent}
+            `);
+        }
+    } catch (error) {
+        console.error("Error fetching user from database:", error);
+        res.status(500).send("Error fetching user from database");
     }
 });
 

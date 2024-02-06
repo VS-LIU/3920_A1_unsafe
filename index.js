@@ -1,6 +1,5 @@
 require('./utils.js');
 require('dotenv').config();
-const fs = require('fs');
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -11,6 +10,7 @@ const database = require('./databaseConnection.js');
 const db_utils = require('./database/db_utils.js');
 const db_users = require('./database/users.js');
 const { get } = require('mongoose');
+const fs = require('fs');
 const success = db_utils.printMySQLVersion();
 const app = express();
 const expireTime = 24 * 60 * 60 * 1000; //expires after 1 day  (hours * minutes * seconds * millis)

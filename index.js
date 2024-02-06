@@ -124,9 +124,6 @@ app.post('/loggingin', async (req, res) => {
         console.log("query: ", query);
         const [results, fields] = await database.query(query);
         console.log("results: ", results);
-        for (let i = 0; i < results.length; i++) {
-            console.log(results[i]);
-        }
         if (results.length == 0) {
             res.render("errorMessage", { error: "Invalid username or password." });
             return;

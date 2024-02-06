@@ -1,0 +1,32 @@
+<%- include('./partials/header.ejs'); %>
+<div class="d-flex justify-content-between">
+  <div>
+    <code>app.get('/protectedRoute') @protectedRoute.ejs</code>
+  </div>
+  <div>
+  </div>
+  <div>
+    <% if (isAdmin) { %>
+      <code>Admin page available:</code><input type="button" value="Admin Page" onclick="window.location.href='/admin'" /> 
+    <% } %>
+  </div>
+</div>
+<h1>Members Page</h1>
+<p>Welcome, <strong><%= username %></strong>!</p>
+<div class="container text-center">
+  <div class="row gx-3">
+    <div class="col-sm border">
+      <div><img src="/<%= imagea %>" alt="random welcome image" class="img-fluid" /></div>
+    </div>
+    <div class="col-sm border">
+      <div><img src="/<%= imageb %>" alt="random welcome image" class="img-fluid" /></div>
+    </div>
+    <div class="col-sm border">
+      <div><img src="/<%= imagec %>" alt="random welcome image" class="img-fluid" /></div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<button class="btn btn-outline-dark" value="Logout" onclick="window.location.href='/logout'">Logout</button>
+<%- include('./partials/footer.ejs'); %>

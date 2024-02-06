@@ -1,0 +1,10 @@
+<%- include('./partials/header.ejs'); %>
+    email address:
+    <form action='/submitEmail' method='post'>
+        <input name='email' type='text' placeholder='email'>
+        <button>Submit</button>
+    </form>
+    <% if (missing) { %>
+        <br> email is required
+    <% } %>  
+<%- include('./partials/footer.ejs'); %>

@@ -1,0 +1,8 @@
+<%- include('./partials/header.ejs'); %>
+    <ul>
+        <% let i=0; %>
+		<% for(i=0; i < users.length; i++) { %>
+        <%- include('./partials/user', {user: users[i]})  %> 
+        <% } %> 
+    </ul>
+<%- include('./partials/footer.ejs'); %>

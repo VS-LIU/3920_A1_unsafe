@@ -1,0 +1,15 @@
+<%- include('./partials/header.ejs'); %>
+<code>app.get('/', '/home') @index.ejs</code>
+        <h1>Landing Page</h1>
+        <img src="5m5h.gif" alt="GIF: Chilling at a bar scene - night" class="img-fluid" />
+        <h2>Welcome! Please login to continue.</h2>
+        
+        <div class="container d-flex text-start ms-0">
+            <form action="/createUser" method="GET">
+            <button class="button me-2">Register</button>
+            </form>
+            <form action="/login" method="GET">
+            <button class="button">Login</button>
+            </form>
+        </div>
+<%- include('./partials/footer.ejs'); %>
